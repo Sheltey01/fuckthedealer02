@@ -59,7 +59,7 @@ ROOT_URLCONF = 'fuckthedealer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': {BASE_DIR / 'templates'},
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,10 +120,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static'),
+)
+
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-
 STATIC_ROOT = BASE_DIR / 'staticfiles' 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
