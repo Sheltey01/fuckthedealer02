@@ -23,7 +23,11 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@material-ui/core": "^4.11.3",
+    "@material-ui/data-grid": "^4.0.0-alpha.23",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "file-loader": "^6.2.0",
+    "notistack": "^1.0.5",
     "react-router-dom": "^5.2.0",
     "whitenoise": "0.0.1"
   },
