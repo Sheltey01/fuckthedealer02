@@ -1,2 +1,2 @@
-release: python manage.py migrate -a django-app-fuckthedealer
+release: python manage.py migrate
 web: gunicorn fuckthedealer.wsgi --log-file -
