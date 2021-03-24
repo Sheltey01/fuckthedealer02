@@ -24,6 +24,11 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "whitenoise": "0.0.1"
+  },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "6.14.10"
   }
 }
