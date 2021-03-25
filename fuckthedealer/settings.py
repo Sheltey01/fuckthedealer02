@@ -26,7 +26,7 @@ SECRET_KEY = 'hk_-fq+%6=g$0o%0e&8kxjcu)3o59hk3&#n7(+q-^n&6ix22fu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-app-fuckthedealer.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['django-app-fuckthedealer.herokuapp.com', '127.0.0.1', 'solid-hare-cevl5r8nisqmdrm0ostfy9z2.herokudns.com', 'test1.fuckthedealer.org']
 
 
 # Application definition
