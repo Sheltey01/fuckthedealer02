@@ -402,7 +402,10 @@ export default function Room(props) {
         : <NormalMenu users={users}/>}
 
       <Grid item xs={12}>
-        <div className="grid-container" id="cardField"/>
+        <div className="pokertisch" style={{width: "110%" ,backgroundSize: "100% 110%", marginLeft: "-5%"}}>
+          <div className="grid-container" id="cardField" style={{paddingTop: "7%", paddingBottom: "5%", 
+          paddingRight: "13%", paddingLeft: "13%"}}/>
+        </div>
       </Grid>
       <Grid item xs={12} align="center">
         <Button

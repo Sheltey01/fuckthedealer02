@@ -24,6 +24,12 @@ html, body {
   transform: translate(-50%, -50%);
 }
 
+.pokertisch {
+  background-image: url("../images/Pokertisch.png");
+  background-size: contain;
+  background-position: center;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 14.8% 14.8% 14.8% 14.8% 14.8% 14.8% 14.8%;
