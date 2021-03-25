@@ -21,10 +21,6 @@ export default class HomePage extends Component {
     this.clearRoomCode = this.clearRoomCode.bind(this);
     this.roomCodeGetter = this.roomCodeGetter.bind(this);
   }
-  componentDidUpdate() {
-    var element = document.getElementById("background");
-    element.classList.add("wrapper")
-  }
 
   componentDidMount() {
    this.updateRoom = setInterval(this.roomCodeGetter, 1000);
@@ -82,8 +78,7 @@ export default class HomePage extends Component {
 
   render() {
     return (
-      <div id="background">
-        <div className="center">
+      <div className="center">
           <Router>
             <Switch>
               <Route
@@ -108,7 +103,6 @@ export default class HomePage extends Component {
             </Switch>
           </Router>
         </div>
-      </div>
     );
   }
 }

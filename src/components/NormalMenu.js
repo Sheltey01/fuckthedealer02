@@ -5,7 +5,7 @@ import { DataGrid } from "@material-ui/data-grid";
 export default function NormalMenu(props) {
     return (
         <Grid item xs={12}>
-        <div style={{ height: 170, "margin-top": 15 }}>
+        <div style={{ height: 170, "marginTop": 15 }}>
           <DataGrid
             rows={props.users}
             disableColumnMenu={true}

@@ -55,17 +55,20 @@ class GetPlayers(APIView):
 
     def get(self, request, format=None):
         code = request.GET.get(self.lookup_url_kwarh)
-        if code != None:
-            spielerListe = Spieler.objects.filter(room_code=code)
-            if spielerListe.count() > 0:
-                dataListe = []
-                for spieler in spielerListe:
-                    data = SpielerSerializer(spieler).data
-                    data['is_host'] = self.request.session.session_key == spieler.host
-                    dataListe.append(data)
-                return JsonResponse(dataListe, status=status.HTTP_200_OK, safe=False)
-            return Response({'Room not found': 'Invalid Room code.'}, status=status.HTTP_404_NOT_FOUND)
-        return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
+        room = Room.objects.filter(code=code)
+        if room.exists():
+            if code != None:
+                spielerListe = Spieler.objects.filter(room_code=code)
+                if spielerListe.count() > 0:
+                    dataListe = []
+                    for spieler in spielerListe:
+                        data = SpielerSerializer(spieler).data
+                        data['is_host'] = self.request.session.session_key == spieler.host
+                        dataListe.append(data)
+                    return JsonResponse(dataListe, status=status.HTTP_200_OK, safe=False)
+                return Response({'Room not found': 'Invalid Room code.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'Room not exisit'}, status=status.HTTP_200_OK)
 
 
 class GetMessage(APIView):
@@ -74,18 +77,21 @@ class GetMessage(APIView):
 
     def get(self, request, format=None):
         code = request.GET.get(self.lookup_url_kwarh)
-        if code != None:
-            spieler = Spieler.objects.filter(host=self.request.session.session_key)[0]
-            messageliste = Message.objects.filter(room_code=code, seeable=True).exclude(player_code=spieler.code)
-            if messageliste.exists:
-                dataListe = []
-                for message in messageliste:
-                    data = MessageSerializer(message).data
-                    data['username'] = spieler.username
-                    dataListe.append(data)
-                return JsonResponse(dataListe, status=status.HTTP_200_OK, safe=False)
-            return Response({'Room not found': 'Invalid Room code.'}, status=status.HTTP_404_NOT_FOUND)
-        return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
+        room = Room.objects.filter(code=code)
+        if room.exists():
+            if code != None:
+                spieler = Spieler.objects.filter(host=self.request.session.session_key)[0]
+                messageliste = Message.objects.filter(room_code=code, seeable=True).exclude(player_code=spieler.code)
+                if messageliste.exists:
+                    dataListe = []
+                    for message in messageliste:
+                        data = MessageSerializer(message).data
+                        data['username'] = spieler.username
+                        dataListe.append(data)
+                    return JsonResponse(dataListe, status=status.HTTP_200_OK, safe=False)
+                return Response({'Room not found': 'Invalid Room code.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'Room not exisit'}, status=status.HTTP_200_OK)
 
 class GetCards(APIView):
     serializer_class = KarteSerializer
@@ -94,14 +100,17 @@ class GetCards(APIView):
     def get(self, request, format=None):
         code = request.GET.get(self.lookup_url_kwarh)
         if code != None:
-            cards = Karte.objects.filter(room_code=code, inUse=True, used=True)
-            if cards.exists:
-                dataliste = []
-                for card in cards:
-                    data = KarteSerializer(card).data
-                    dataliste.append(data)
-                return JsonResponse(dataliste, status=status.HTTP_200_OK, safe=False)
-            return Response({'Room not found': 'Invalid Room code.'}, status=status.HTTP_404_NOT_FOUND)
+            room = Room.objects.filter(code=code)
+            if room.exists():
+                cards = Karte.objects.filter(room_code=code, inUse=True, used=True)
+                if cards.exists:
+                    dataliste = []
+                    for card in cards:
+                        data = KarteSerializer(card).data
+                        dataliste.append(data)
+                    return JsonResponse(dataliste, status=status.HTTP_200_OK, safe=False)
+                return Response({'Room not found': 'Invalid Room code.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'Room not exisit'}, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -112,25 +121,28 @@ class GetDealerCardView(APIView):
     def get(self, request, format=None):
         code = request.GET.get(self.lookup_url_kwarh)
         if code != None:
-            host = self.request.session.session_key
-            querysetSpieler = Spieler.objects.filter(host=host)[0]
-            if querysetSpieler.type == 1:
-                cards_results = Karte.objects.filter(
-                    room_code=code, used=False)
-                if len(cards_results) < 1:
-                    return Response({"message": "Out of Stock"}, status=status.HTTP_204_NO_CONTENT)
-                active_cards = cards_results.filter(inUse=True)
-                if len(active_cards) > 0:
-                    card = KarteSerializer(active_cards[0]).data
-                    return Response(card, status=status.HTTP_200_OK)
-                randomCard = random.randint(0, len(cards_results)-1)
-                card = cards_results[randomCard]
-                card.inUse = True
-                card.save(update_fields=["inUse"])
-                cardSerialized = KarteSerializer(card).data
-                return Response(cardSerialized, status=status.HTTP_200_OK)
-            return Response({"message": "You aren't the dealer"}, status=status.HTTP_200_OK)
-        return Response({"message": "Bad Request!"}, status=status.HTTP_400_BAD_REQUEST)
+            room = Room.objects.filter(code=code)
+            if room.exists():
+                host = self.request.session.session_key
+                querysetSpieler = Spieler.objects.filter(host=host)[0]
+                if querysetSpieler.type == 1:
+                    cards_results = Karte.objects.filter(
+                        room_code=code, used=False)
+                    if len(cards_results) < 1:
+                        return Response({"message": "Out of Stock"}, status=status.HTTP_204_NO_CONTENT)
+                    active_cards = cards_results.filter(inUse=True)
+                    if len(active_cards) > 0:
+                        card = KarteSerializer(active_cards[0]).data
+                        return Response(card, status=status.HTTP_200_OK)
+                    randomCard = random.randint(0, len(cards_results)-1)
+                    card = cards_results[randomCard]
+                    card.inUse = True
+                    card.save(update_fields=["inUse"])
+                    cardSerialized = KarteSerializer(card).data
+                    return Response(cardSerialized, status=status.HTTP_200_OK)
+                return Response({"message": "You aren't the dealer"}, status=status.HTTP_200_OK)
+            return Response({"message": "Bad Request!"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'Room not exisit'}, status=status.HTTP_200_OK)
 
 
 class UserInRoom(APIView):
@@ -297,10 +309,11 @@ class UserLeaveRoom(APIView):
     def post(self, request, format=None):
         code = request.data.get('room_code')
         host_id = self.request.session.session_key
-        room_results = Room.objects.filter(host=host_id)
+        roomToCode = Room.objects.filter(code=code)
         isHost = request.data.get('isHost')
-        if room_results.exists() or isHost or Room.objects.filter(code=code)[0].started:
-            spieler_results = Spieler.objects.filter(room_code=code)
+        spieler_results = Spieler.objects.filter(room_code=code)
+        if roomToCode.exists() and (isHost or roomToCode[0].started or len(spieler_results) == 1):
+            room = roomToCode[0]
             for spieler in spieler_results:
                 spieler.delete()
             karten_results = Karte.objects.filter(room_code=code)
@@ -309,7 +322,7 @@ class UserLeaveRoom(APIView):
             message_results = Message.objects.filter(room_code=code)
             for message in message_results:
                 message.delete()
-            room = room_results[0]
+            room = roomToCode[0]
             room.delete()
         else:
             spieler_results = Spieler.objects.filter(host=host_id)

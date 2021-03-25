@@ -148,7 +148,7 @@ export default class CreateRoomPage extends Component{
                     }}
                   />
                   <FormHelperText>
-                    <div align="center">The amount of players which are needed to play that game</div>
+                    <span align="center">The amount of players which are required</span>
                   </FormHelperText>
                   <TextField
                     required={true}

@@ -212,7 +212,7 @@ export default function Room(props) {
       img.style.cssText +=
         "opacity:" +
         image.opacity +
-        ";width:90%;max-width:85px;min-width:10px;margin-top:-" +
+        ";width:90%;max-width:85px;min-width:10px;marginTop:-" +
         image.margin_top+"px;top:-"+image.top+"px;position: relative;";
       document.getElementById(divname).appendChild(img);
   }
@@ -299,7 +299,7 @@ export default function Room(props) {
       .then((data) => {
         if(data == null) return;
         setMaximalPlayer(data.maximal_player);
-        setGameStarted(data.gameStarted);
+        setGameStarted(data.started);
         setIsHost(data.is_host);
       });
     getPlayerDetailsToRoomNumber();
@@ -388,7 +388,7 @@ export default function Room(props) {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} align="center">
-        <Typography variant="h8" component="h8">
+        <Typography variant="h6" component="h6">
           Code: {roomCode}
         </Typography>
       </Grid>
@@ -402,7 +402,7 @@ export default function Room(props) {
         : <NormalMenu users={users}/>}
 
       <Grid item xs={12}>
-        <div class="grid-container" id="cardField"/>
+        <div className="grid-container" id="cardField"/>
       </Grid>
       <Grid item xs={12} align="center">
         <Button

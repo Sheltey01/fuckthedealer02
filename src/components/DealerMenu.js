@@ -135,7 +135,7 @@ export default function DealerMenu(props) {
 
   return (
     <Grid item xs={12} align="center">
-      <div style={{ height: 170, "margin-top": 15, width: "60%", float: "left" }}>
+      <div style={{ height: 170, "marginTop": 15, width: "60%", float: "left" }}>
         <DataGrid
           rows={props.users}
           disableColumnMenu={true}
@@ -154,7 +154,7 @@ export default function DealerMenu(props) {
         />
       </div>
       {cardForDealer.number == null ? null : 
-      <div style={{ width: "30%", float: "left", "margin-top": 15, "padding-left": 20}}>
+      <div style={{ width: "30%", float: "left", "marginTop": 15, "padding-left": 20}}>
         {drawDealerImage()}
         <div className={classes.root}>
           <div  style={{position: "absolute", right: "10%", transform: "translate(3%, 0%)"}}>
