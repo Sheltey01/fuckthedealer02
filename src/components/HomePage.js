@@ -10,13 +10,14 @@ import {
   Redirect,
 } from "react-router-dom";
 import Room from "./Room";
+import GameInfo from "./GameInfo"
 import { ButtonGroup, Button, Typography, Grid } from "@material-ui/core";
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomCode: null,
+      roomCode: null
     };
     this.clearRoomCode = this.clearRoomCode.bind(this);
     this.roomCodeGetter = this.roomCodeGetter.bind(this);
@@ -72,6 +73,7 @@ export default class HomePage extends Component {
             </Button>
           </ButtonGroup>
         </Grid>
+        <GameInfo></GameInfo>
       </Grid>
     );
   }

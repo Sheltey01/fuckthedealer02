@@ -386,7 +386,7 @@ export default function Room(props) {
 
   if(user == null) return;
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={1} scroll={'paper'}>
       <Grid item xs={12} align="center">
         <Typography variant="h6" component="h6">
           Code: {roomCode}
