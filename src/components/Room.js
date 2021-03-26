@@ -386,7 +386,8 @@ export default function Room(props) {
 
   if(user == null) return;
   return (
-    <Grid container spacing={1} scroll={'paper'}>
+    <div>
+      <Grid container spacing={1}>
       <Grid item xs={12} align="center">
         <Typography variant="h6" component="h6">
           Code: {roomCode}
@@ -403,11 +404,11 @@ export default function Room(props) {
 
       <Grid item xs={12}>
         <div className="pokertisch" style={{width: "110%" ,backgroundSize: "100% 110%", marginLeft: "-5%"}}>
-          <div className="grid-container" id="cardField" style={{paddingTop: "7%", paddingBottom: "5%", 
+          <div className="grid-container" id="cardField" style={{paddingTop: "10%", paddingBottom: "8%", 
           paddingRight: "13%", paddingLeft: "13%"}}/>
         </div>
       </Grid>
-      <Grid item xs={12} align="center">
+      <Grid item xs={12} align="center" style={{marginTop: "-2%"}}>
         <Button
           variant="contained"
           color="secondary"
@@ -416,6 +417,8 @@ export default function Room(props) {
       </Grid>
       {isHost ? renderStartButton() : null}
     </Grid>
+    </div>
+
   );
   
 }
