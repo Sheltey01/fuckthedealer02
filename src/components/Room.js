@@ -384,7 +384,7 @@ export default function Room(props) {
     });
   }
 
-  if(user == null) return;
+  if(user == null) return (<div></div>);
   return (
     <div>
       <Grid container spacing={1}>
@@ -398,9 +398,9 @@ export default function Room(props) {
           Username: {user.username}
         </Typography>
       </Grid>
-      {user.type === 1
+      {user.id == null ? null : user.type === 1
         ? <DealerMenu users={users} currentUser={user} roomCode={roomCode} />
-        : <NormalMenu users={users}/>}
+        : <NormalMenu users={users} roomCode={roomCode}/>}
 
       <Grid item xs={12}>
         <div className="pokertisch" style={{width: "110%", backgroundSize: "100% 110%", marginLeft: "-5%"}}>

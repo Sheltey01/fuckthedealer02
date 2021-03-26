@@ -19,5 +19,6 @@ urlpatterns = [
     path('leave-room', UserLeaveRoom.as_view()),
     path('send-guessertip', SendGuesserTip.as_view()),
     path('send-dealertip', SendDealerTip.as_view()),
+    path('get-card-count', GetCardCountView.as_view()),
     path('delete-everythink', DeleteEverythink.as_view())
 ]

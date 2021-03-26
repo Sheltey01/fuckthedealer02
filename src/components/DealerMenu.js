@@ -27,7 +27,7 @@ export default function DealerMenu(props) {
   const prevOpen = React.useRef(open);
 
   React.useEffect(() => {
-    var dealerCardToRoomNumberInterval = setInterval(getDealerCardToRoomNumber, 1500);
+    var dealerCardToRoomNumberInterval = setInterval(getDealerCardToRoomNumber, 700);
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -118,9 +118,9 @@ export default function DealerMenu(props) {
   function drawDealerImage() {
     return (
       <img
-        height={120}
-        width={90}
-        style={{ "marginBottom": 15, "marginLeft": "30%" }}
+        height={"60%"}
+        width={"40%"}
+        style={{ marginBottom: 15, paddingLeft: "28%", minWidth: "60px", maxWidth: "400px"}}
         align="center"
         src={
           require("../images/" +
@@ -134,7 +134,7 @@ export default function DealerMenu(props) {
   }
 
   return (
-    <Grid item xs={12} align="center">
+    <Grid item xs={12} >
       <div style={{ height: 170, "marginTop": 15, width: "60%", float: "left" }}>
         <DataGrid
           rows={props.users}
@@ -155,14 +155,15 @@ export default function DealerMenu(props) {
       </div>
       {cardForDealer.number == null ? null : 
       <div style={{ width: "30%", float: "left", "marginTop": 15, "paddingLeft": 20}}>
-        {drawDealerImage()}
         <div className={classes.root}>
-          <div  style={{position: "absolute", right: "10%", transform: "translate(3%, 0%)"}}>
+          <div>
+            {drawDealerImage()}
             <Button
               ref={anchorRef}
               aria-controls={open ? "menu-list-grow" : undefined}
               aria-haspopup="true"
-              style={{width: "130%"}}
+              size="small"
+              style={{right: "-15%"}}
               variant="contained"
               disabled={!props.currentUser.canTip}
               color="primary"

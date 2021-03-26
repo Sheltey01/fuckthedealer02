@@ -113,6 +113,21 @@ class GetCards(APIView):
             return Response({'Room not exisit'}, status=status.HTTP_200_OK)
         return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetCardCountView(APIView):
+    lookup_url_kwarh = 'code'
+    serialiter_class_card = KarteSerializer
+
+    def get(self, request, format=None):
+        code = request.GET.get(self.lookup_url_kwarh)
+        if code != None:
+            room = Room.objects.filter(code=code)
+            if room.exists():
+                cards = Karte.objects.filter(room_code=code, inUse=False, used=False)
+                return JsonResponse({'cardsInStack':len(cards)}, status=status.HTTP_200_OK)
+            return Response({'Room not exisit'}, status=status.HTTP_200_OK)
+        return Response({'Bad Request': 'Code parameter not found in request.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+
 
 class GetDealerCardView(APIView):
     lookup_url_kwarh = 'code'
