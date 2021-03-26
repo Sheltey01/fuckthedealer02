@@ -120,7 +120,7 @@ export default function DealerMenu(props) {
       <img
         height={"60%"}
         width={"40%"}
-        style={{ marginBottom: 15, paddingLeft: "28%", minWidth: "60px", maxWidth: "400px"}}
+        style={{ marginBottom: 15, paddingLeft: "28%", minWidth: "50px", maxWidth: "400px"}}
         align="center"
         src={
           require("../images/" +

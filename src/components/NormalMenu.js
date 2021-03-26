@@ -30,7 +30,7 @@ export default function NormalMenu(props) {
         <img
           height={"60%"}
           width={"40%"}
-          style={{ marginBottom: 15, paddingLeft: "28%", minWidth: "80px" }}
+          style={{ marginBottom: 15, paddingLeft: "28%", minWidth: "50px" }}
           align="center"
           src={require("../images/purple_back.png").default}
         />
