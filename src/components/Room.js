@@ -212,7 +212,7 @@ export default function Room(props) {
       img.style.cssText +=
         "opacity:" +
         image.opacity +
-        ";width:90%;max-width:85px;min-width:10px;marginTop:-" +
+        ";width:90%;max-width:85px;min-width:10px;margin-top:-" +
         image.margin_top+"px;top:-"+image.top+"px;position: relative;";
       document.getElementById(divname).appendChild(img);
   }
@@ -348,8 +348,8 @@ export default function Room(props) {
             cards.push(cardFromConverter);
             cards.find((d) => d.code == intToNameConverter(cardFromConverter.number)).show = false;
             var activeCards = cards.filter((c) => c.number == cardFromConverter.number && c.show == true);
-            cardFromConverter.top = activeCards.length > 1 ? (activeCards.length-1) > 0 ? (activeCards.length-1) * 15 : 15 : 0;
-            cardFromConverter.margin_top = activeCards.length > 1 ? 200 : 0;
+            cardFromConverter.top = activeCards.length > 1 ? (activeCards.length-1) > 0 ? (activeCards.length-1) * 20 : 20 : 0;
+            cardFromConverter.margin_top = activeCards.length > 1 ? 100 : 0;
 
             if (activeCards.length == 1) {
               var documentDiv = document.getElementById("card"+
@@ -403,8 +403,8 @@ export default function Room(props) {
         : <NormalMenu users={users}/>}
 
       <Grid item xs={12}>
-        <div className="pokertisch" style={{width: "110%" ,backgroundSize: "100% 110%", marginLeft: "-5%"}}>
-          <div className="grid-container" id="cardField" style={{paddingTop: "10%", paddingBottom: "8%", 
+        <div className="pokertisch" style={{width: "110%", backgroundSize: "100% 110%", marginLeft: "-5%"}}>
+          <div className="grid-container" id="cardField" style={{paddingTop: "11%", paddingBottom: "8%", 
           paddingRight: "13%", paddingLeft: "13%"}}/>
         </div>
       </Grid>

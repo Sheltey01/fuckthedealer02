@@ -120,7 +120,7 @@ export default function DealerMenu(props) {
       <img
         height={120}
         width={90}
-        style={{ "margin-bottom": 15, "margin-left": "30%" }}
+        style={{ "marginBottom": 15, "marginLeft": "30%" }}
         align="center"
         src={
           require("../images/" +
@@ -154,7 +154,7 @@ export default function DealerMenu(props) {
         />
       </div>
       {cardForDealer.number == null ? null : 
-      <div style={{ width: "30%", float: "left", "marginTop": 15, "padding-left": 20}}>
+      <div style={{ width: "30%", float: "left", "marginTop": 15, "paddingLeft": 20}}>
         {drawDealerImage()}
         <div className={classes.root}>
           <div  style={{position: "absolute", right: "10%", transform: "translate(3%, 0%)"}}>
