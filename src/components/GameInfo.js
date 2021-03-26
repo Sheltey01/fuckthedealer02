@@ -48,18 +48,10 @@ export default function ScrollDialog() {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {"Before you start the Fuck the Dealer drinking game,"+
-            " the dealer asks the first player (typically whoever is to their left) to guess the card from the"+
-            " top of the deck's suit (Hearts / Diamonds / Spades / Clubs). Should they guess right, "+
-            "the dealer drinks (10) and the next player's turn begins."+
-            " If the first guess of the card's suit was incorrect,"+
-            " the same player must now guess what the value of the next card pulled will be."+
-            " Should they guess correctly, their turn ends and the dealer drinks (5)"+
-            " If the guesser didn't get the value of the card right in their second guess, the guesser drink the difference of the first and the second guess."+
-            " After that the player next to him is now the guesser."+
-            " You can add variable rules such as 2 players in a row must guess incorrectly all 3 times in order for dealer to change"+
-            " if you want, or you can remove any one of the three questions that you see fit."+
-            " If the dealer doesn't change before all cards in the deck are used, a new dealer begins with the new deck."}
+            {"To start the game the dealer asks the person to their left what is the card on top of the deck. The dealer then checks to see if the guess was right. If the guess was right then the dealer has to take 10 drinks from their drink. If the first guess was wrong then the dealer tells the person guessing if the card is “Higher” or “Lower” than their guess."+
+             " The player guessing then gets to guess again. If the person now guesses the correct card then the dealer has to take 5 drinks from their beer. If the second guess was also wrong then the person guessing has to drink as many drinks as the difference between their guess and the real value of the card. For example if on the second guess the person guessed a “4” and the real card is an '8'"+ 
+             ", then they must take 4 drinks. Take the real card and place it on the table. After a few rounds you will be able to see what cards have already been used and it will help you in guessing."+
+             " Game play then continues around the circle clockwise. If three consecutive players to not guess the right card then the person who is the dealer moves to the next person on the left of the dealer. The game plays until there are no more cards left in the deck."}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
