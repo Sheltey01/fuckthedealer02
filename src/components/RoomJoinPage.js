@@ -9,11 +9,21 @@ export default class RoomJoinPage extends Component{
         super(props);
         this.state = {
             roomCode: "",
-            error: ""
+            error: "",
+            username: "",
+            buttonEnabled: false
         };
         this.handleTextfieldUpdates = this.handleTextfieldUpdates.bind(this);
-        this.roomButtonPressed = this.roomButtonPressed.bind(this)
-        this.handleUsernameChanged = this.handleUsernameChanged.bind(this)
+        this.roomButtonPressed = this.roomButtonPressed.bind(this);
+        this.handleUsernameChanged = this.handleUsernameChanged.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    }
+
+    componentDidUpdate() {
+        function isEmptyOrSpaces(str){
+          return str === null || str.match(/^ *$/) !== null;
+        }  
+        this.state.buttonEnabled = !isEmptyOrSpaces(this.state.username)
     }
 
     handleTextfieldUpdates(e) {
@@ -25,7 +35,11 @@ export default class RoomJoinPage extends Component{
     handleUsernameChanged(e) {
         this.setState({
           username: e.target.value
-        })
+        });
+        function isEmptyOrSpaces(str){
+            return str === null || str.match(/^ *$/) !== null;
+        };  
+        this.state.createRoomButtonEnabled = !isEmptyOrSpaces(this.state.username)
       }
 
     roomButtonPressed() {
@@ -86,6 +100,7 @@ export default class RoomJoinPage extends Component{
                 <Button 
                         variant="contained" 
                         color="primary"
+                        disabled={!this.state.buttonEnabled}
                         onClick={this.roomButtonPressed}>
                             Enter room
                     </Button>

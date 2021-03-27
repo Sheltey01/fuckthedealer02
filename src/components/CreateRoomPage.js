@@ -24,12 +24,14 @@ export default class CreateRoomPage extends Component{
             maximal_player: this.props.maximal_player,
             username: this.props.username,
             errorMag: "",
-            successMsg: ""
+            successMsg: "",
+            createRoomButtonEnabled: false
         };
-        this.handleMaximalPlayerChanged = this.handleMaximalPlayerChanged.bind(this)
-        this.handleUsernameChanged = this.handleUsernameChanged.bind(this)
+        this.handleMaximalPlayerChanged = this.handleMaximalPlayerChanged.bind(this);
+        this.handleUsernameChanged = this.handleUsernameChanged.bind(this);
         this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
-        this.handleUpdateButtonPressed = this.handleUpdateButtonPressed.bind(this)
+        this.handleUpdateButtonPressed = this.handleUpdateButtonPressed.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
     } 
 
     handleMaximalPlayerChanged(e) {
@@ -42,6 +44,17 @@ export default class CreateRoomPage extends Component{
       this.setState({
         username: e.target.value
       })
+      function isEmptyOrSpaces(str){
+        return str === null || str.match(/^ *$/) !== null;
+      }  
+      this.state.createRoomButtonEnabled = !isEmptyOrSpaces(this.state.username)
+    }
+
+    componentDidUpdate() {
+      function isEmptyOrSpaces(str){
+        return str === null || str.match(/^ *$/) !== null;
+      }  
+      this.state.createRoomButtonEnabled = !isEmptyOrSpaces(this.state.username)
     }
 
     renderCreateButtons() {
@@ -51,6 +64,7 @@ export default class CreateRoomPage extends Component{
             <Button
                 color="primary"
                 variant="contained"
+                disabled={!this.state.createRoomButtonEnabled}
                 onClick={this.handleRoomButtonPressed}>
               Create A Room
             </Button>
